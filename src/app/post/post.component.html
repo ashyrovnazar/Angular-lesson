@@ -1,5 +1,26 @@
-<div class="post">
-    <h2>Hello World!</h2>
+<div [ngStyle]="{
+    backgroundColor: inputValue.length > 5 ? 'red' : 'blue'
+}"
+class="post">
+    <h2 [class.red]="inputValue2.length > 5">Hello World!</h2>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos facere magni quasi reiciendis! Ab aliquam
         incidunt magni necessitatibus nesciunt saepe!</p>
+    <input (keydown.enter)="onInput($event)" (blur)="onBlur(inputTarget.value)" #inputTarget />
+    <p>{{inputValue}}</p>
+    <input type="text" [(ngModel)] = 'inputValue2'>
+    <p [ngClass]="{
+        red: inputValue
+    }">{{inputValue2}}</p>
+
+    <button (click)="toggle = !toggle">Click</button>
+    <p *ngIf="toggle; else test">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita mollitia nobis porro unde velit.</p>
+    <ng-template #test>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, quos!</p>
+    </ng-template>
+
+    <p [ngSwitch]="inputValue">
+        <strong *ngSwitchCase="'Qwes'">Админ</strong>
+        <strong *ngSwitchCase="'Franc'">Пользователь</strong>
+        <strong *ngSwitchDefault>Гость</strong>
+    </p>
 </div>
